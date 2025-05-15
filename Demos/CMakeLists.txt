@@ -1,0 +1,3 @@
+add_executable(Demo1 Demo1.cpp)
+
+target_link_libraries(Demo1 glfw3 opengl32 gdi32 glad Rikka)

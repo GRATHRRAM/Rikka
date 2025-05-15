@@ -2,11 +2,15 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+#include "Rikka/Rikka.hpp"
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
 }
 
 int main() {
+    rkk::Engine Engine("Yo", 10 , 10);
+
     // Init GLFW
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW\n";
@@ -19,7 +23,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Create window
-    GLFWwindow* window = glfwCreateWindow(800, 600, "GLAD + GLFW", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Rikka Engine", nullptr, nullptr);
     if (!window) {
         std::cerr << "Failed to create GLFW window\n";
         glfwTerminate();
