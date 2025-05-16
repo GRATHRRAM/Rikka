@@ -23,4 +23,4 @@ endforeach()
 
 add_library(Rikka SHARED ${SOURCE})
 
-target_link_libraries(Rikka glfw3 opengl32 gdi32)
+target_link_libraries(Rikka glfw3 gdi32 glad)

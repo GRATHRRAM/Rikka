@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+typedef bool TaskDone;
+
 typedef int8_t  rint8;
 typedef int16_t rint16;
 typedef int32_t rint;
