@@ -21,6 +21,6 @@ foreach(HEADER_FILE ${HEADER_FILES})
     file(COPY "${HEADER_FILE}" DESTINATION "${DEST_FILE}")
 endforeach()
 
-add_library(Rikka SHARED ${SOURCE})
+add_library(Rikka STATIC ${SOURCE})
 
 target_link_libraries(Rikka glfw3 gdi32 glad)
