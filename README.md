@@ -1,0 +1,2 @@
+# Rikka
+Simple OpenGL Engine
