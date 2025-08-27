@@ -10,6 +10,10 @@ cd build
 cmake ..
 make 
 ```
+# Arch Dependencies 
+```
+sudo pacman -Sy glew glfw make cmake gcc
+```
 
 # Screen Shoots
 <img width="1364" height="767" alt="image" src="https://github.com/user-attachments/assets/44c0a988-0565-4850-833d-270225a7b605" />
