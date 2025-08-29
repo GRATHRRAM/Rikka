@@ -1,11 +1,11 @@
 #include "../RikkaDraw.hpp"
 
-void RikkaDraw::Clear(Color ClearColor) {
-    glClearColor(ClearColor.fr(), ClearColor.fg(), ClearColor.fb(), ClearColor.fa());
+void RikkaDraw::Clear(RikkaColor Color) {
+    glClearColor(Color.fr(), Color.fg(), Color.fb(), Color.fa());
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void RikkaDraw::Rect(Vector2 Position, Vector2 Size, Color RectColor) {
+void RikkaDraw::Rect(Vector2 Position, Vector2 Size, RikkaColor Color) {
   GLfloat vertices[] = {
         Position.x,          Position.y,          0.0f,
         Position.x + Size.x, Position.y,          0.0f,
@@ -38,7 +38,7 @@ void RikkaDraw::Rect(Vector2 Position, Vector2 Size, Color RectColor) {
     glUseProgram(Shaders.RectShaderProgram);
 
     GLint colorLoc = glGetUniformLocation(Shaders.RectShaderProgram, "rectColor");
-    glUniform4f(colorLoc, RectColor.fr(), RectColor.fg(), RectColor.fb(), RectColor.fa());
+    glUniform4f(colorLoc, Color.fr(), Color.fg(), Color.fb(), Color.fa());
 
     GLuint ScreenSizeLoc = glGetUniformLocation(Shaders.RectShaderProgram, "ScreenSize");
     glUniform3f(ScreenSizeLoc, ScreenSize.x, ScreenSize.y, 0);
@@ -50,3 +50,11 @@ void RikkaDraw::Rect(Vector2 Position, Vector2 Size, Color RectColor) {
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
 }
+
+void RikkaDraw::Rect(Shapes::Rect& Rect, RikkaColor Color) {
+    RikkaDraw::Rect(Rect.Position, Rect.Size, Color);
+}   
+
+void RikkaDraw::Rect(Shapes::CRect& Rect) {
+    RikkaDraw::Rect(Rect.Position, Rect.Size, Rect.Color);
+}   

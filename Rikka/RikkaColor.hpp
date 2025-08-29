@@ -2,16 +2,16 @@
 #include <cstdint>
 #include <algorithm>
 
-class Color {
+class RikkaColor {
 public:
     uint8_t r, g, b, a;
 
-    Color() : r(0), g(0), b(0), a(255) {}
-    Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255)
+    RikkaColor() : r(0), g(0), b(0), a(255) {}
+    RikkaColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255)
         : r(red), g(green), b(blue), a(alpha) {}
 
-    static Color FromNormalized(float red, float green, float blue, float alpha = 1.0f) {
-        return Color(
+    static RikkaColor FromNormalized(float red, float green, float blue, float alpha = 1.0f) {
+        return RikkaColor(
             static_cast<uint8_t>(Clamp01(red) * 255.0f),
             static_cast<uint8_t>(Clamp01(green) * 255.0f),
             static_cast<uint8_t>(Clamp01(blue) * 255.0f),

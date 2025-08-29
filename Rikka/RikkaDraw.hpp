@@ -12,6 +12,9 @@ class RikkaDraw {
         Shaders(Shaders), ScreenSize(ScreenSize) {}
 
     void Resize(int Width, int Height) {ScreenSize.x = Width; ScreenSize.y = Height;}
-    void Clear(Color ClearColor);
-    void Rect(Vector2 Position, Vector2 Size, Color RectColor);
+    void Clear(RikkaColor Color);
+    
+    void Rect(Vector2 Position, Vector2 Size, RikkaColor Color);
+    void Rect(Shapes::Rect& Rect, RikkaColor Color);
+    void Rect(Shapes::CRect& Rect);
 };
