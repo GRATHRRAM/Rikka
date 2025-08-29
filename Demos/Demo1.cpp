@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 int main() {
-    Rikka Engine("Rikka Engine", 800, 600);
+    Rikka Engine("Rikka Engine", 800, 600, false);
 
     RikkaInput Input;
     Input.BindKey("Up",    GLFW_KEY_UP);

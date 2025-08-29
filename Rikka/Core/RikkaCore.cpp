@@ -5,11 +5,14 @@
 
 #include "../RikkaMacros.hpp"
 
-Rikka::Rikka(const char* Title, uint16_t ResX, uint16_t ResY) { 
+Rikka::Rikka(const char* Title, uint16_t ResX, uint16_t ResY, bool CanResize) { 
     if (!glfwInit()) {
         std::cerr << "GLFW Init Failed!\n";
         return;
     }
+    
+    if(CanResize) glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+    else glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
     Window = glfwCreateWindow(ResX, ResY, Title, nullptr, nullptr);
     if (!Window) {
@@ -35,8 +38,9 @@ Rikka::Rikka(const char* Title, uint16_t ResX, uint16_t ResY) {
         std::cout << "RikkaCore -> Shaders Failded To Compile!!!" << "\n";
         return;
     }
-    
-    Draw = std::make_unique<RikkaDraw>(Shaders, Vector2i{static_cast<int>(ResX),static_cast<int>(ResY)});
+   
+    ScreenSize = {ResX, ResY};
+    Draw = std::make_unique<RikkaDraw>(Shaders, ScreenSize);
     
     glfwSetWindowUserPointer(Window, this);
     glfwSetFramebufferSizeCallback(Window, framebuffer_size_callback);
