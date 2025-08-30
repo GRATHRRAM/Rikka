@@ -87,7 +87,7 @@ void RikkaDraw::Triangle(Shapes::Triangle Triangle, RikkaColor Color) {
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);;
+    glDeleteBuffers(1, &VBO);
 }
 
 void RikkaDraw::Triangle(Shapes::CTriangle Triangle) {
@@ -100,5 +100,38 @@ void RikkaDraw::Triangle(Shapes::CTriangle Triangle) {
 }
 
 void RikkaDraw::Triangle(Shapes::BlendTriangle& Triangle) {
-    return;
+    GLfloat vertices[] = {
+        Triangle.Position.x + Triangle.Point1.x, Triangle.Position.y + Triangle.Point1.y, 0.0f,
+        Triangle.Point1Color.fr(), Triangle.Point1Color.fg(), Triangle.Point1Color.fb(),
+
+        Triangle.Position.x + Triangle.Point2.x, Triangle.Position.y + Triangle.Point2.y, 0.0f,
+        Triangle.Point2Color.fr(), Triangle.Point2Color.fg(), Triangle.Point2Color.fb(),
+        
+        Triangle.Position.x + Triangle.Point3.x, Triangle.Position.y + Triangle.Point3.y, 0.0f,
+        Triangle.Point3Color.fr(), Triangle.Point3Color.fg(), Triangle.Point3Color.fb(),
+    };
+
+    GLuint VAO, VBO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+    
+    glUseProgram(Shaders.BlendTriangleShader.GetShader());
+
+    GLuint ScreenSizeLoc = glGetUniformLocation(Shaders.BlendTriangleShader.GetShader(), "ScreenSize");
+    glUniform2f(ScreenSizeLoc, ScreenSize.x, ScreenSize.y);
+
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
 }
