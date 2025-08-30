@@ -17,7 +17,8 @@ class RikkaDraw {
     void Rect(Shapes::Rect& Rect, RikkaColor Color);
     void Rect(Shapes::CRect& Rect);
 
+    void Triangle(Shapes::BlendTriangle& Triangle, float Alpha);
+    void Triangle(Shapes::BlendTriangle& Triangle);
     void Triangle(Shapes::Triangle Triangle, RikkaColor Color);
     void Triangle(Shapes::CTriangle Triangle);
-    void Triangle(Shapes::BlendTriangle& Triangle);
 };

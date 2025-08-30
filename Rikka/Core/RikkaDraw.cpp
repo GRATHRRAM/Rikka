@@ -99,7 +99,7 @@ void RikkaDraw::Triangle(Shapes::CTriangle Triangle) {
     }, Triangle.Color);
 }
 
-void RikkaDraw::Triangle(Shapes::BlendTriangle& Triangle) {
+void RikkaDraw::Triangle(Shapes::BlendTriangle& Triangle, float Alpha) {
     GLfloat vertices[] = {
         Triangle.Position.x + Triangle.Point1.x, Triangle.Position.y + Triangle.Point1.y, 0.0f,
         Triangle.Point1Color.fr(), Triangle.Point1Color.fg(), Triangle.Point1Color.fb(),
@@ -130,8 +130,15 @@ void RikkaDraw::Triangle(Shapes::BlendTriangle& Triangle) {
     GLuint ScreenSizeLoc = glGetUniformLocation(Shaders.BlendTriangleShader.GetShader(), "ScreenSize");
     glUniform2f(ScreenSizeLoc, ScreenSize.x, ScreenSize.y);
 
+    GLuint AlphaLoc = glGetUniformLocation(Shaders.BlendTriangleShader.GetShader(), "Alpha");
+    glUniform1f(AlphaLoc, Alpha);
+
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+}
+
+void RikkaDraw::Triangle(Shapes::BlendTriangle& Triangle) {
+    RikkaDraw::Triangle(Triangle, 1.0f);
 }

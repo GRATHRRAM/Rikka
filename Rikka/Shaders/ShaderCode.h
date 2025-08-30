@@ -76,8 +76,10 @@ const char* RKK_TriangleBlendFragmentGLSL =
 "out vec4 FragColor;\n"
 "in vec3 OurColor;\n"
 "\n"
+"uniform float Alpha;"
+"\n"
 "void main() {\n"
-"FragColor = vec4(OurColor, 1.0);\n"
+"FragColor = vec4(OurColor, Alpha);\n"
 "}\n";
 
 #endif

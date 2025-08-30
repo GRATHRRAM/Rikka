@@ -5,5 +5,6 @@
 #include "RikkaMacros.hpp"
 #include "RikkaTypes.hpp"
 #include "RikkaColor.hpp"
+#include "RikkaMath.hpp"
 #include "RikkaCore.hpp"
 #include "RikkaInput.hpp"
