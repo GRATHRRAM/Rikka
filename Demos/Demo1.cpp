@@ -1,7 +1,4 @@
 #include "Rikka.hpp"
-#include "RikkaInput.hpp"
-#include <GLFW/glfw3.h>
-#include <stdlib.h>
 
 int main() {
     Rikka Engine("Rikka Engine", 800, 600, false);

@@ -28,5 +28,35 @@ const char* RKK_RectFragmentGLSL =
 "   FragColor = fragColor;\n"
 "}";
 
+const char* RKK_TriangleVertexGLSL = 
+"#version 330 core\n"
+"\n"
+"layout(location = 0) in vec3 VPos; //VertexPos\n"
+"\n"
+"out vec4 VertFragColor;\n"
+"\n"
+"uniform vec4 TriangleColor;\n"
+"uniform vec2 ScreenSize;\n"
+"\n"
+"void main() {\n"
+"   float sx = VPos.x / ScreenSize.x * 2 - 1;\n"
+"   float sy = VPos.y / ScreenSize.y * 2 - 1;\n"
+"   gl_Position = vec4(sx, -sy, VPos.z, 1.0);\n"
+"   VertFragColor = TriangleColor;\n"
+"}\n";
+
+const char* RKK_TriangleFragmentGLSL =
+"#version 330 core\n"
+"\n"
+"in vec4 VertFragColor;\n"
+"out vec4 FragColor;\n"
+"\n"
+"void main() {\n"
+"   FragColor = VertFragColor;\n"
+"}\n";
+
+const char* RKK_TriangleBlendFragmentGLSL =
+"";
+
 #endif
 

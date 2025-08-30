@@ -1,15 +1,14 @@
-#include <GL/glew.h>
+#pragma once
+#include "RikkaShader.hpp"
 
 class RikkaShaders {
     private:
     bool Compiled;
-
-    void DeleteShaders();
     public:
-    ~RikkaShaders();
-  
     bool CompileShaders();
     bool DidShadersCompiled();//RKK Success == ok
 
-    unsigned int RectShaderProgram;
+    RikkaShader RectShader;
+    RikkaShader TriangleShader;
+    RikkaShader BlendTriangleShader;
 };
