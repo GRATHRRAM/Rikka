@@ -91,14 +91,12 @@ void RikkaDraw::Triangle(Shapes::Triangle Triangle, RikkaColor Color) {
 }
 
 void RikkaDraw::Triangle(Shapes::CTriangle Triangle) {
-    return;
-    /*
-    Triangle(Shapes::Triangle{
+    RikkaDraw::Triangle(Shapes::Triangle{
         .Position = Triangle.Position,
         .Point1 = Triangle.Point1,
         .Point2 = Triangle.Point2,
         .Point3 = Triangle.Point3
-    }, Triangle.Color);*/
+    }, Triangle.Color);
 }
 
 void RikkaDraw::Triangle(Shapes::BlendTriangle& Triangle) {
