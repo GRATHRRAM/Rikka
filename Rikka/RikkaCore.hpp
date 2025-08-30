@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <cstdint>
 #include <memory>
+#include <chrono>
 
 class Rikka {
     public:
@@ -17,9 +18,21 @@ class Rikka {
         GLFWwindow* GetWindow() const {return Window;}
 
         void ResizeWindow(int width, int height) {glViewport(0, 0, width, height); ScreenSize = {width, height};}
+ 
+        void NewFrame();
+        float GetDelta() const;
+
+        void SetFrameLock(int FPS = 60);
+        void LockFrame();
+
     private:
         Vector2i ScreenSize;
         GLFWwindow* Window;
+
+        std::chrono::time_point<std::chrono::high_resolution_clock> lastTime;
+        float DeltaTime;
+        float CalcFrameTime;
+
         static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
             Rikka* rikka = static_cast<Rikka*>(glfwGetWindowUserPointer(window));
             if (rikka) {

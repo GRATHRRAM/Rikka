@@ -4,6 +4,7 @@
 
 int main() {
     Rikka Engine("Rikka Engine", 800, 600);
+    Engine.SetFrameLock();
 
     Shapes::BlendTriangle Triangle = {
         .Position = Vector2{300,300},
@@ -16,6 +17,7 @@ int main() {
     };
 
     while(!glfwWindowShouldClose(Engine.GetWindow())) {
+        Engine.NewFrame();
         glfwPollEvents();
 
         Shapes::Triangle TriRot = RikkaMath::RotateTriangle(Shapes::Triangle{
@@ -24,7 +26,7 @@ int main() {
             Triangle.Point2,
             Triangle.Point3
             },
-            1,
+            Engine.GetDelta() * 10,
             Vector2{150,150}
         );
 
@@ -35,5 +37,6 @@ int main() {
         Engine.Draw->Clear(RikkaColor());    
         Engine.Draw->Triangle(Triangle);
         glfwSwapBuffers(Engine.GetWindow());
+        Engine.LockFrame();
     }
 }

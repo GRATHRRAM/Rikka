@@ -2,6 +2,7 @@
 
 int main() {
     Rikka Engine("Rikka Engine", 800, 600, false);
+    Engine.SetFrameLock();
 
     RikkaInput Input;
     Input.BindKey("Up",    GLFW_KEY_UP);
@@ -19,14 +20,17 @@ int main() {
     Player.Size = Vector2{100,100};
     Player.Color = RikkaColor(255,0,255,200);
 
+    float Speed = 100;
+
     while(!glfwWindowShouldClose(Engine.GetWindow())) {
+        Engine.NewFrame();
         glfwPollEvents();
         Input.Update(Engine.GetWindow());
 
-        if(Input.GetActionState("Up")    == ActionState::Pressed) Player.Position.y -= 1;
-        if(Input.GetActionState("Down")  == ActionState::Pressed) Player.Position.y += 1;
-        if(Input.GetActionState("Left")  == ActionState::Pressed) Player.Position.x -= 1;
-        if(Input.GetActionState("Right") == ActionState::Pressed) Player.Position.x += 1;
+        if(Input.GetActionState("Up")    == ActionState::Pressed) Player.Position.y -= Speed * Engine.GetDelta();
+        if(Input.GetActionState("Down")  == ActionState::Pressed) Player.Position.y += Speed * Engine.GetDelta();
+        if(Input.GetActionState("Left")  == ActionState::Pressed) Player.Position.x -= Speed * Engine.GetDelta();
+        if(Input.GetActionState("Right") == ActionState::Pressed) Player.Position.x += Speed * Engine.GetDelta();
         
         Engine.Draw->Clear(RikkaColor());    
         Engine.Draw->Rect(Vector2{100,100}, Vector2{100,100}, RikkaColor(255,0,0,128));
@@ -34,5 +38,6 @@ int main() {
         Engine.Draw->Rect(Vector2{200,200}, Vector2{100,100}, RikkaColor(0,0,255,128));
         Engine.Draw->Rect(Player);
         glfwSwapBuffers(Engine.GetWindow());
+        Engine.LockFrame();
     }
 }
