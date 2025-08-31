@@ -5,6 +5,9 @@ int main() {
     Engine.SetFrameLock();
     
     RikkaTexture Texture;
+    Texture.Position = Vector2{0,0};
+    Texture.Size = {618,1096};
+
     if(!Texture.LoadTexture("rikka.png", GL_CLAMP_TO_BORDER, GL_LINEAR)) return -1;
 
     while (!glfwWindowShouldClose(Engine.GetWindow())) {

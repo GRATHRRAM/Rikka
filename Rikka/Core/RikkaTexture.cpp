@@ -6,7 +6,7 @@
 #include <stb_image.h>
 
 bool RikkaTexture::LoadTexture(const char* Path, unsigned int WrapMode, unsigned int FilteringMode) {
-    stbi_set_flip_vertically_on_load(true);
+    //stbi_set_flip_vertically_on_load(true);
 
     int width, height, nrChannels;
     unsigned char *data = stbi_load(Path, &width, &height, &nrChannels, 0);

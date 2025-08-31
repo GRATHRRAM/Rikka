@@ -91,10 +91,14 @@ const char* RKK_TextureVertexGLSL =
 "out vec3 ourColor;\n"
 "out vec2 TexCoord;\n"
 "\n"
+"uniform vec2 ScreenSize;\n"
+"\n"
 "void main() {\n"
-"    gl_Position = vec4(aPos, 1.0);\n"
-"    ourColor = aColor;\n"
-"    TexCoord = aTexCoord;\n"
+"   float sx = aPos.x / ScreenSize.x * 2 - 1;\n"
+"   float sy = aPos.y / ScreenSize.y * 2 - 1;\n"
+"   gl_Position = vec4(sx, -sy, aPos.z, 1.0);\n"
+"   ourColor = aColor;\n"
+"   TexCoord = aTexCoord;\n"
 "}\n";
 
 const char* RKK_TextureFragmentGLSL = 

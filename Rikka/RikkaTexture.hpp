@@ -1,5 +1,6 @@
 #pragma once
 #include "RikkaShader.hpp"
+#include "RikkaTypes.hpp"
 
 class RikkaTexture {
     private:
@@ -8,6 +9,9 @@ class RikkaTexture {
  
     public:
     ~RikkaTexture();
+    
+    Vector2 Position;
+    Vector2 Size;
 
     bool LoadTexture(const char* Path, unsigned int WrapMode, unsigned int FilteringMode);
     unsigned int GetTexture() const;

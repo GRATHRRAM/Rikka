@@ -146,11 +146,11 @@ void RikkaDraw::Triangle(Shapes::BlendTriangle& Triangle) {
 
 void RikkaDraw::Texture(RikkaTexture& texture) {
     float vertices[] = {
-        // positions          // colors           // tex coords
-         0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-         0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
+        // positions                                                                      // colors           // tex coords
+        texture.Position.x + texture.Size.x, texture.Position.y + texture.Size.y, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+        texture.Position.x + texture.Size.x, texture.Position.y,                  0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+        texture.Position.x,                  texture.Position.y,                  0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+        texture.Position.x,                  texture.Position.y + texture.Size.y, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
     };
 
     GLuint indices[] = {
@@ -180,14 +180,16 @@ void RikkaDraw::Texture(RikkaTexture& texture) {
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
-    GLuint shader = Shaders.TextureShader.GetShader();
-    glUseProgram(shader);
+    glUseProgram(Shaders.TextureShader.GetShader());
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture.GetTexture());
 
-    GLint samplerLoc = glGetUniformLocation(shader, "uTexture");
+    GLint samplerLoc = glGetUniformLocation(Shaders.TextureShader.GetShader(), "uTexture");
     glUniform1i(samplerLoc, 0);
+
+    unsigned int ScreenSizeLoc = glGetUniformLocation(Shaders.TextureShader.GetShader(), "ScreenSize");
+    glUniform2f(ScreenSizeLoc, ScreenSize.x, ScreenSize.y);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
