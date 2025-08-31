@@ -2,6 +2,7 @@
 #include "RikkaColor.hpp"
 #include "RikkaShaders.hpp"
 #include "RikkaTypes.hpp"
+#include "RikkaTexture.hpp"
 
 class RikkaDraw {
     const RikkaShaders& Shaders;
@@ -21,4 +22,6 @@ class RikkaDraw {
     void Triangle(Shapes::BlendTriangle& Triangle);
     void Triangle(Shapes::Triangle Triangle, RikkaColor Color);
     void Triangle(Shapes::CTriangle Triangle);
+    
+    void Texture(RikkaTexture& Texture);
 };

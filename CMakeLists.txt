@@ -7,5 +7,7 @@ project(Rikka VERSION 1.0)
 
 add_compile_options(-Wall -Wextra -Wno-sequence-point -g)
 
+include_directories(${CMAKE_SOURCE_DIR}/include)
+
 add_subdirectory(${CMAKE_SOURCE_DIR}/Rikka)
 add_subdirectory(${CMAKE_SOURCE_DIR}/Demos)

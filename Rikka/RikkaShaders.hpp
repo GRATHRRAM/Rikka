@@ -11,4 +11,5 @@ class RikkaShaders {
     RikkaShader RectShader;
     RikkaShader TriangleShader;
     RikkaShader BlendTriangleShader;
+    RikkaShader TextureShader;
 };
